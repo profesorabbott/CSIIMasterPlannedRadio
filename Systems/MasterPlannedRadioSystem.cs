@@ -1,4 +1,4 @@
-using Game;
+﻿using Game;
 using Game.Audio;
 using Game.Prefabs;
 using Game.Simulation;
@@ -7,9 +7,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Scripting;
 
-namespace MyCoolMod.Systems
+namespace MasterPlannedRadio.Systems
 {
-    public class MyCoolModSystem : GameSystemBase
+    public class MasterPlannedRadioSystem : GameSystemBase
     {
         // private SimulationSystem simulation;
 

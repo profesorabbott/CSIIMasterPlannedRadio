@@ -7,7 +7,7 @@ using Game.UI;
 using HarmonyLib;
 using UnityEngine;
 
-namespace MasterPlannedRadioYL.Patches
+namespace MasterPlannedRadioNW.Patches
 {
 	[HarmonyPatch(typeof(GameManager), "InitializeThumbnails")]
 	internal class GameManager_InitializeThumbnails

@@ -7,7 +7,7 @@ using HarmonyLib;
     using BepInEx.Unity.Mono;
 #endif
 
-namespace MasterPlannedRadioYL
+namespace MasterPlannedRadioNW
 {   
     [BepInDependency("ExtendedRadio")]
     [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]

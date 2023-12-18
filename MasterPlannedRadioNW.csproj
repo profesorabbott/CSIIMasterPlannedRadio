@@ -9,8 +9,8 @@
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
-		<AssemblyName>MasterPlannedRadioYL</AssemblyName>
-		<RootNamespace>MasterPlannedRadioYL</RootNamespace>
+		<AssemblyName>MasterPlannedRadioNW</AssemblyName>
+		<RootNamespace>MasterPlannedRadioNW</RootNamespace>
 		<Description>Master Planned Radio</Description>
 		<Version>0.3.0</Version>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>

@@ -1,5 +1,5 @@
-﻿all: build
-BEPINEX_VERSION = 6
+all: build
+BEPINEX_VERSION = 5
 
 clean:
 	@dotnet clean
@@ -13,11 +13,11 @@ build: clean restore
 package-win:
 	@-mkdir dist
 	@cmd /c copy /y "bin\Debug\netstandard2.1\0Harmony.dll" "dist\"
-	@cmd /c copy /y "bin\Debug\netstandard2.1\MasterPlannedRadio.dll" "dist\"
+	@cmd /c copy /y "bin\Debug\netstandard2.1\ExtendedRadio.dll" "dist\"
 	@echo Packaged to dist/
 
 package-unix: build
 	@-mkdir dist
 	@cp bin/Debug/netstandard2.1/0Harmony.dll dist
-	@cp bin/Debug/netstandard2.1/MasterPlannedRadio.dll dist
+	@cp bin/Debug/netstandard2.1/ExtendedRadio.dll dist
 	@echo Packaged to dist/

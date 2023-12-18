@@ -9,12 +9,12 @@
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
-		<AssemblyName>MasterPlannedRadio</AssemblyName>
-		<RootNamespace>MasterPlannedRadio</RootNamespace>
-		<Description>A mod that I made for Cities: Skylines 2</Description>
-		<Version>0.1.0</Version>
+		<AssemblyName>MasterPlannedRadioYL</AssemblyName>
+		<RootNamespace>MasterPlannedRadioYL</RootNamespace>
+		<Description>Master Planned Radio</Description>
+		<Version>0.3.0</Version>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<LangVersion>latest</LangVersion>
+		<LangVersion>preview</LangVersion>
 		<RestoreAdditionalProjectSources>
 			https://api.nuget.org/v3/index.json;
 			https://nuget.bepinex.dev/v3/index.json;
@@ -34,6 +34,10 @@
 		<Cities2_Location>C:\Program Files (x86)\Steam\steamapps\common\Cities Skylines II</Cities2_Location>
 	</PropertyGroup>
 
+	<ItemGroup>
+		<Reference Include="$(Cities2_Location)\BepInEx\plugins\ExtendedRadio\ExtendedRadio.dll" />
+	</ItemGroup>
+
 	<!--
 		This is all the references to the DLLs directly from your game directory. The Cities2_Location property
 		above needs to be uncommented for this to work
@@ -42,14 +46,15 @@
         <Reference Include="$(Cities2_Location)\Cities2_Data\Managed\Colossal.*.dll" Private="False"/>
         <Reference Include="$(Cities2_Location)\Cities2_Data\Managed\Game.dll" Private="False"/>
         <Reference Include="$(Cities2_Location)\Cities2_Data\Managed\Unity.*.dll" Private="False"/>
+		<Reference Include="cohtml.Net"><HintPath>$(Cities2_Location)\Cities2_Data\Managed\cohtml.Net.dll</HintPath><Private>False</Private></Reference>
 	</ItemGroup>
 
-	<!--
-		If you want to embed things directly into your mod, instead of shipping multiple files
-	<ItemGroup>
-	  <EmbeddedResource Include="./resources/my_pretty_embedded_image.jpg" />
-	</ItemGroup>
-	-->
+	
+		<!-- If you want to embed things directly into your mod, instead of shipping multiple files -->
+	<!-- <ItemGroup>
+	  <EmbeddedResource Include="./resources/DefaultIcon.svg" />
+	</ItemGroup> -->
+	
 
 	<!--
 		This ItemGroup is used in CI for the game DLLs.
@@ -86,16 +91,20 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(BepInExVersion)' == '5'">
-		<PackageReference Include="BepInEx.Core" Version="5.4.21" IncludeAssets="compile"/>
+		<PackageReference Include="BepInEx.Core" Version="5.4.*" IncludeAssets="compile"/>
 	</ItemGroup>
 
 	<PropertyGroup Condition="'$(BepInExVersion)' == '6'">
 		<DefineConstants>$(DefineConstants);BEPINEX_V6</DefineConstants>
 	</PropertyGroup>
 
-	<ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
+	<!-- <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
 		<PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2"
 			PrivateAssets="all" />
+	</ItemGroup> -->
+
+	<ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
+		<PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
 	</ItemGroup>
 
 	<!--
@@ -104,6 +113,9 @@
 	-->
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(CI)' != 'true'">
 		<Exec
-			Command="if not exist &quot;$(Cities2_Location)\BepInEx\plugins\$(ProjectName)&quot; mkdir &quot;$(Cities2_Location)\BepInEx\plugins\$(ProjectName)&quot;&#xD;&#xA;copy /Y &quot;$(TargetDir)0Harmony.dll&quot; &quot;$(Cities2_Location)\BepInEx\plugins\$(ProjectName)\0Harmony.dll&quot;&#xD;&#xA;copy /Y &quot;$(TargetDir)$(ProjectName).dll&quot; &quot;$(Cities2_Location)\BepInEx\plugins\$(ProjectName)\$(ProjectName).dll&quot;" />
+			Command="if not exist &quot; $(Cities2_Location)\BepInEx\plugins\$(ProjectName)&quot; mkdir &quot;$(Cities2_Location)\BepInEx\plugins\$(ProjectName)&quot;&#xD;&#xA;
+					copy /Y &quot;$(TargetDir)0Harmony.dll&quot; &quot;$(Cities2_Location)\BepInEx\plugins\$(ProjectName)\0Harmony.dll&quot;&#xD;&#xA;
+					copy /Y &quot;$(TargetDir)$(ProjectName).dll&quot; &quot;$(Cities2_Location)\BepInEx\plugins\$(ProjectName)\$(ProjectName).dll&quot;&#xD;&#xA;"
+		/>
 	</Target>
 </Project>
